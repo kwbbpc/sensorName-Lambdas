@@ -74,7 +74,7 @@ public class DynamoDbSensorNames {
 
         logger.info("Getting all sensors");
 
-        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression().withIndexName("sensorName-index");
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         List<SensorNameDao> queryResults = dynamoDBMapper.scan(SensorNameDao.class, scanExpression);
 
 
