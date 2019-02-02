@@ -4,13 +4,16 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Index;
 import com.amazonaws.services.dynamodbv2.document.Table;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class DynamoDbSensorNames {
@@ -64,6 +67,18 @@ public class DynamoDbSensorNames {
 
         return searchForSensor(query);
 
+
+    }
+
+    public List<SensorNameDao> getAllSensors(){
+
+        logger.info("Getting all sensors");
+
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression().withIndexName("sensorName-index");
+        List<SensorNameDao> queryResults = dynamoDBMapper.scan(SensorNameDao.class, scanExpression);
+
+
+        return queryResults;
 
     }
 

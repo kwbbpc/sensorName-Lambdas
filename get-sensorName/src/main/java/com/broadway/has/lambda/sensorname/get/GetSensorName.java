@@ -7,7 +7,6 @@ import com.broadway.has.lambda.sensorname.JsonUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
 import java.util.Map;
 
 
@@ -33,6 +32,10 @@ public class GetSensorName implements RequestHandler<Map<String, Object>, GetSen
 
             if(request.getNodeId() != null){
                 return new GetSensorNameResponse(db.getSensorByNodeId(request.getNodeId()));
+            }
+
+            if(request.getName() == null && request.getNodeId() == null){
+                return new GetMultiSensorNameResponse(db.getAllSensors());
             }
 
             return new GetSensorNameResponse(null);

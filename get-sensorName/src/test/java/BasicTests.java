@@ -1,6 +1,6 @@
 
 import com.broadway.has.lambda.sensorname.JsonUtils;
-import com.broadway.has.lambda.sensorname.delete.DeleteSensorName;
+import com.broadway.has.lambda.sensorname.get.GetSensorName;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.Test;
 
@@ -10,16 +10,16 @@ public class BasicTests {
 
 
     @Test
-    public void goodTest() throws Exception{
+    public void getAllSensors() throws Exception{
 
 
         String params = "{\n" +
-                "  \"nodeId\": \"Test Sensor X 2\"\n" +
+                "  " +
                 "}";
 
         JsonNode node = JsonUtils.MAPPER.readTree(params);
 
-        DeleteSensorName n = new DeleteSensorName();
+        GetSensorName n = new GetSensorName();
         n.handleRequest(JsonUtils.MAPPER.convertValue(node, Map.class), null);
 
 
